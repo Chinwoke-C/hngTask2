@@ -20,16 +20,24 @@ import static com.hngTask2.identify.utility.IdentifyUtilities.*;
 public class PersonRequest {
 
 
-    @JsonProperty("full_name")
-    private String name;
     @NotBlank(message = NOT_BLANK)
     @NotNull(message = NOT_NULL)
-    @Pattern(regexp = "^(0[1-9]|1[012])[- /.] (0[1-9]|[12][0-9]|3[01])[- /.] (19|20)\\d\\d$",
+    private String firstName;
+
+    @NotBlank(message = NOT_BLANK)
+    @NotNull(message = NOT_NULL)
+    private String lastName;
+
+    @NotBlank(message = NOT_BLANK)
+    @NotNull(message = NOT_NULL)
+    @Pattern(regexp = "[0-9]{2}/[0-9]{2}/[0-9]{4}",
     message = INVALID)
     private String dateOfBirth;
+
     @Pattern(regexp = "((^234)[0–9]{10})", message = INVALID_PHONE_NUMBER)
     private String phoneNumber;
-   @JsonUnwrapped
+
+  // @JsonUnwrapped
    @NotBlank(message = NOT_BLANK)
    @NotNull(message = NOT_NULL)
     private Address address;

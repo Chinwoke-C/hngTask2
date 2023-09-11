@@ -2,6 +2,8 @@ package com.hngTask2.identify.data.repository;
 
 import com.hngTask2.identify.data.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AddressRepository extends JpaRepository<Long, Address> {
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
 }

@@ -6,7 +6,9 @@ import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.hngTask2.identify.data.dto.request.PersonRequest;
 import com.hngTask2.identify.data.dto.response.ApiResponse;
+import com.hngTask2.identify.data.model.Address;
 import com.hngTask2.identify.data.model.Person;
+import com.hngTask2.identify.data.repository.AddressRepository;
 import com.hngTask2.identify.data.repository.PersonRepository;
 import com.hngTask2.identify.exception.BusinessLogicException;
 import lombok.AllArgsConstructor;
@@ -16,28 +18,40 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static com.hngTask2.identify.utility.IdentifyUtilities.MAX_NUMBER_PER_PAGE;
 
 @Service
 @AllArgsConstructor
 @Slf4j
-public class PersonInterfaceImpl implements PersonInterface{
+public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
     @Override
     public ApiResponse createPerson(PersonRequest personRequest) {
         Person person = new Person();
-        Person.builder()
-                .id(person.getId())
-                .firstName(person.getFirstName())
-                .lastName(person.getLastName())
-                .dateOfBirth(person.getDateOfBirth())
-                .address(person.getAddress())
-                .phoneNumber(person.getPhoneNumber())
-                .build();
+        LocalDate dateOfBirth = convertStringDateToLocalDate(personRequest.getDateOfBirth());
+        person.setFirstName(personRequest.getFirstName());
+        person.setLastName(personRequest.getLastName());
+        person.setDateOfBirth(dateOfBirth);
+        person.setAddress(personRequest.getAddress());
+        person.setPhoneNumber(personRequest.getPhoneNumber());
+//        Person.builder()
+//                .id(person.getId())
+//                .firstName(personRequest.getFirstName())
+//                .lastName(personRequest.getLastName())
+//                .dateOfBirth(dateOfBirth)
+//                .address(personRequest.getAddress())
+//                .phoneNumber(personRequest.getPhoneNumber())
+//                .build();
         Person savedPerson = personRepository.save(person);
         return getApiResponse(savedPerson);
+    }
+
+    private LocalDate convertStringDateToLocalDate(String dateOfBirth) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(dateOfBirth, dateTimeFormatter);
     }
 
     private static ApiResponse getApiResponse(Person savedPerson) {
