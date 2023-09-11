@@ -5,4 +5,5 @@ public class IdentifyUtilities {
     public static final String NOT_NULL = "cannot be null";
     public  static final String INVALID ="invalid date format";
     public static final String INVALID_PHONE_NUMBER = "invalid phone number format";
+    public static final int MAX_NUMBER_PER_PAGE = 5;
 }

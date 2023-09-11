@@ -11,5 +11,7 @@ ApiResponse createPerson(PersonRequest personRequest);
 Person getPersonById(Long personId);
 Page<Person>getAllPersons(int pageNumber);
 Person updatePerson(Long personId, JsonPatch updatePayload);
+void deletePerson(Long personId);
+
 
 }

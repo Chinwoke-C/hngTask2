@@ -2,16 +2,14 @@ package com.hngTask2.identify.data.model;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
