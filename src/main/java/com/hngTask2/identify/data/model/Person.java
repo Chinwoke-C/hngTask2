@@ -1,9 +1,7 @@
 package com.hngTask2.identify.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,4 +20,7 @@ public class Person {
     private String lastName;
     private String dateOfBirth;
     private String phoneNumber;
+    @JsonUnwrapped
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 }
