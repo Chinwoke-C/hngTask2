@@ -33,6 +33,6 @@ build/
 .vscode/
 
 ### Secrets ###
-\src\main\resources\secrets.properties
+secrets.properties
 
 
