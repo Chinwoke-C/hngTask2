@@ -71,13 +71,14 @@ public class PersonServiceImpl implements PersonService {
     public Person updatePerson(Long personId, JsonPatch updatePayload) {
         ObjectMapper mapper = new ObjectMapper();
         Person foundPerson = getPersonById(personId);
-        //parse person object to node
+        //convert person object to JsonNode
         JsonNode node = mapper.convertValue(foundPerson, JsonNode.class);
         try {
             //apply patch
             JsonNode updatedNode = updatePayload.apply(node);
-            //parse node back to passenger object
+            //convert node back to person object
             Person updatedPerson = mapper.convertValue(updatedNode, Person.class);
+            updatedPerson.setId(foundPerson.getId());
             updatedPerson = personRepository.save(updatedPerson);
             return updatedPerson;
         } catch (JsonPatchException e) {
