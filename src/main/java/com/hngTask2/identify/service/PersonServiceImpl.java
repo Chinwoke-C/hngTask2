@@ -2,14 +2,11 @@ package com.hngTask2.identify.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.hngTask2.identify.data.dto.request.PersonRequest;
 import com.hngTask2.identify.data.dto.response.ApiResponse;
-import com.hngTask2.identify.data.model.Address;
 import com.hngTask2.identify.data.model.Person;
-import com.hngTask2.identify.data.repository.AddressRepository;
 import com.hngTask2.identify.data.repository.PersonRepository;
 import com.hngTask2.identify.exception.BusinessLogicException;
 import lombok.AllArgsConstructor;
@@ -32,12 +29,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public ApiResponse createPerson(PersonRequest personRequest) {
         Person person = new Person();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        LocalDate dateOfBirth = convertStringDateToLocalDate(personRequest.getDateOfBirth());
         person.setFirstName(personRequest.getFirstName());
         person.setLastName(personRequest.getLastName());
-        person.setDateOfBirth(dateOfBirth);
         person.setAddress(personRequest.getAddress());
         person.setPhoneNumber(personRequest.getPhoneNumber());
 //        Person.builder()
@@ -50,11 +43,6 @@ public class PersonServiceImpl implements PersonService {
 //                .build();
         Person savedPerson = personRepository.save(person);
         return getApiResponse(savedPerson);
-    }
-
-    private LocalDate convertStringDateToLocalDate(String dateOfBirth) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(dateOfBirth, dateTimeFormatter);
     }
 
     private static ApiResponse getApiResponse(Person savedPerson) {

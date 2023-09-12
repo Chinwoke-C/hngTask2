@@ -28,12 +28,6 @@ public class PersonRequest {
     @NotNull(message = NOT_NULL)
     private String lastName;
 
-    @NotBlank(message = NOT_BLANK)
-    @NotNull(message = NOT_NULL)
-    @Pattern(regexp = "[0-9]{2}/[0-9]{2}/[0-9]{4}",
-    message = INVALID)
-    private String dateOfBirth;
-
     @Pattern(regexp = "((^234)[0–9]{10})", message = INVALID_PHONE_NUMBER)
     private String phoneNumber;
 
