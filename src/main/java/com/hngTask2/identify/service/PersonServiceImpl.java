@@ -2,6 +2,7 @@ package com.hngTask2.identify.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.hngTask2.identify.data.dto.request.PersonRequest;
@@ -31,6 +32,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public ApiResponse createPerson(PersonRequest personRequest) {
         Person person = new Person();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         LocalDate dateOfBirth = convertStringDateToLocalDate(personRequest.getDateOfBirth());
         person.setFirstName(personRequest.getFirstName());
         person.setLastName(personRequest.getLastName());
