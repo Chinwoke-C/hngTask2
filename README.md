@@ -13,9 +13,6 @@ updating data as needed, and deleting records when required.
   - [Running the API](#running-the-api)
 - [API Endpoints](#api-endpoints)
 - [Examples](#examples)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
@@ -53,8 +50,6 @@ To create a new person, send a POST request to /api/persons with a JSON body con
 
 Example request body:
 
-json
-Copy code
 {
   "firstName": "John",
   "lastName": "Doe",
@@ -71,18 +66,8 @@ To update a person's information, send a PATCH request to /api/persons/{id} with
 
 Example request body (JSON Patch):
 
-json
-Copy code
 [
   { "op": "replace", "path": "/phoneNumber", "value": "+1-987-654-3210" }
 ]
-Documentation
-For comprehensive API documentation, including detailed information on request and response formats, please refer to API Documentation.
 
-Contributing
-We welcome contributions from the community. If you'd like to contribute to the project, please follow our Contributing Guidelines.
 
-License
-This project is licensed under the MIT License.
-
-Note: Replace <repository_url> in the "Setting Up the Environment" section with the URL of your API's Git repository.
