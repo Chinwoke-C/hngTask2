@@ -31,14 +31,6 @@ public class PersonServiceImpl implements PersonService {
         person.setLastName(personRequest.getLastName());
         person.setAddress(personRequest.getAddress());
         person.setPhoneNumber(personRequest.getPhoneNumber());
-//        Person.builder()
-//                .id(person.getId())
-//                .firstName(personRequest.getFirstName())
-//                .lastName(personRequest.getLastName())
-//                .dateOfBirth(dateOfBirth)
-//                .address(personRequest.getAddress())
-//                .phoneNumber(personRequest.getPhoneNumber())
-//                .build();
         Person savedPerson = personRepository.save(person);
         return getApiResponse(savedPerson);
     }
